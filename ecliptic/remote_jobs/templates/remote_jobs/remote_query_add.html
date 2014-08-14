@@ -1,0 +1,32 @@
+
+<p>
+    <label for="remote_query_host">Host:</label>
+    <input type="text" id="remote_query_host" name="remote_query_host" size=100/>
+</p>
+
+<p>
+    <label for="remote_query_username">User Name:</label>
+    <input type="text" id="remote_query_username" name="remote_query_username"/>
+</p>
+
+<p>
+    <label for="remote_query_password">Password:</label>
+    <input type="password" id="remote_query_password" name="remote_query_password"/>
+</p>
+
+
+<p>
+	<label for="remote_query_query">Query:</label>
+	<textarea id="remote_query_query" name="remote_query_query" type="text" hidden/></textarea>
+	<pre id="remote_query_editor" style="height: 300px;"></pre>
+</p>
+
+<script>
+    var editor = ace.edit("remote_query_editor");
+    var $ta = $("#remote_query_query")
+    editor.setTheme("ace/theme/github");
+    editor.getSession().setMode("ace/mode/sql");
+    editor.getSession().on('change', function(){
+    	$ta.val(editor.getValue());
+    });
+</script>

@@ -1,0 +1,19 @@
+<html>
+
+<head>
+	<title>Studies!</title>
+</head>
+
+<body>
+	<h1>Welcome!</h1>
+	<hr>
+	<div>
+	{% block content %}
+	<p><a href="{% url 'study_list' %}">Study List</a></p>
+	{% endblock %}
+	</div>
+	<hr>
+	<p><a href="{% url 'account_logout' %}"><button>Logout</button></a> <a href="{% url 'account_login' %}"><button>Login</button></a></p>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+            {% if job_list.count > 0 %}
+            <div class="list-group">
+                {% for rj in job_list.all %}
+                  <a href="{% url 'remote_job_detail' rj.id %}" class="list-group-item">
+                    <span class="badge 
+                    {% if rj.get_status == 'SUCCESS' %}
+                    alert-success
+                    {% elif rj.get_status == 'FAILURE' %}
+                    alert-danger
+                    {% else %}
+                    alert-default
+                    {% endif %}">{{rj.get_status}}</span>
+
+                    <h4 class="list-group-item-heading">{{ rj.name }}</h4>
+                    <p class="list-group-item-text">
+                        {% if show_study_name %}<footer>{{ rj.study.name }}</footer>{% endif %}
+                        {% if show_create_dt %}<small>Created on {{ rj.create_dt }}</small>{% endif %}
+                    </p>
+                  </a>
+                {% endfor %}
+            </div>
+            {% endif %}

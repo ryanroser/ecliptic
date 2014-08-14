@@ -1,0 +1,50 @@
+    <div class="row">    
+        <div class="col-lg-12">
+            <h3>Remote Query Details</h3>
+        </div>
+    </div>
+
+
+	<div class="row">    
+        <div class="col-lg-12">
+		    <dl>
+			    <dt>Status</dt>
+			    <dd><p><span class="badge 
+	                    {% if celery.status == 'SUCCESS' %}
+	                    alert-success
+	                    {% elif celery.status == 'FAILURE' %}
+	                    alert-danger
+	                    {% else %}
+	                    alert-default
+	                    {% endif %}">{{celery.status}}</span></p></dd>
+
+		    	<dt>User</dt>
+		    	<dd><pre>{{ job.username }}</pre></dd>
+
+		    	<dt>Password</dt>
+		    	<dd><pre>********</pre></dd>
+
+		    	<dt>Host</dt>
+		    	<dd><pre>{{ job.host }}</pre></dd>
+
+			    <dt>Query</dt>
+			    <dd><pre id="editor" style="height: 300px;">{{ job.query }}</pre></dd>
+
+			    <dt>Params</dt>
+			    <dd><pre>{{ job.params }}</pre></dd>
+
+			    <dt>Task id</dt>
+			    <dd><p><a href="http://localhost:5555/task/{{ job.celery_job }}">{{ job.celery_job }}</a></p></dd>
+
+			    <dt>Result</dt>
+			    <dd><pre>{{ celery.result }}</pre></dd>
+		    </dl>
+    	</div>
+    </div>
+		    <script>
+			    var editor = ace.edit("editor");
+			    editor.setTheme("ace/theme/github");
+		        editor.getSession().setMode("ace/mode/sql");
+		        editor.setReadOnly(true);
+		    </script>
+    

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block nav_jobs_class %}active{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-lg-12">
+    		<h2>Jobs</h2>
+	    </div>
+	</div>
+
+    <div class="row">    
+        <div class="col-lg-12">
+        	<table class="table table-hover table-condensed">
+        		<thead>
+        		<tr>
+        			<th>ID</th>
+        			<th>Study</th>
+        			<th>Job Name</th>
+        			<th>Job Type</th>
+        			<th>Create Date</th>
+        			<th>Status</th>
+        		</tr>
+	        	</thead>
+	        	<tbody>
+					{% for rj in object_list %}
+	        		<tr>
+	        			<td>{{ rj.id }}</td>
+	        			<td><a href="{% url 'study_detail' rj.study.id %}">{{ rj.study.name }}</a></td>
+	        			<td><a href="{% url 'remote_job_detail' rj.id %}">{{ rj.name }}</a></td>
+	        			<td>{{ rj.job_type }}</td>
+	        			<td>{{ rj.create_dt }}</td>
+			        	<td><span class="badge 
+			                    {% if rj.get_status == 'SUCCESS' %}
+			                    alert-success
+			                    {% elif rj.get_status == 'FAILURE' %}
+			                    alert-danger
+			                    {% else %}
+			                    alert-default
+			                    {% endif %}">{{rj.get_status}}</span></td>
+	        		</tr>
+	                {% endfor %}
+				</tbody>
+        	</table>
+        </div>
+    </div>
+
+{% endblock %}
